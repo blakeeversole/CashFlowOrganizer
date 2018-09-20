@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CashFlowOrganizerModelEntitiesStoreContainer" CdmEntityContainer="CashFlowOrganizerEntities">
+    <FunctionImportMapping FunctionImportName="ProfileInsert" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileInsert">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileInsert_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ProfileIncomeExpenseSelect" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileIncomeExpenseSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileIncomeExpenseSelect_Result">
+          <ScalarProperty Name="IncomeXML" ColumnName="IncomeXML" />
+          <ScalarProperty Name="ExpenseXML" ColumnName="ExpenseXML" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ProfileSelectByUserID" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileSelectByUserID" />
+    <FunctionImportMapping FunctionImportName="ProfileAccountInsertUpdate" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileAccountInsertUpdate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileAccountInsertUpdate_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ProfileAccountSelect" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileAccountSelect" />
+    <FunctionImportMapping FunctionImportName="ProfileIncomeExpenseInsertUpdate" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileIncomeExpenseInsertUpdate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileIncomeExpenseInsertUpdate_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="IncomeAndExpenseDatesSelect" FunctionName="CashFlowOrganizerModelEntities.Store.IncomeAndExpenseDatesSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.IncomeAndExpenseDatesSelect_Result">
+          <ScalarProperty Name="IncomeOrExpense" ColumnName="IncomeOrExpense" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="NextDate" ColumnName="NextDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CombinedBalanceSelect" FunctionName="CashFlowOrganizerModelEntities.Store.CombinedBalanceSelect" />
+    <FunctionImportMapping FunctionImportName="ProfileSelect" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileSelect_Result">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ProfileDeleteALL" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileDeleteALL">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileDeleteALL_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ProfileUpdate" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileUpdate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileUpdate_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ProfileInfoSelect" FunctionName="CashFlowOrganizerModelEntities.Store.ProfileInfoSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.ProfileInfoSelect_Result">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="TotalMoneySaved" ColumnName="TotalMoneySaved" />
+          <ScalarProperty Name="TotalAvailableFunds" ColumnName="TotalAvailableFunds" />
+          <ScalarProperty Name="AverageMonthlyCashFlow" ColumnName="AverageMonthlyCashFlow" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

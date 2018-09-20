@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CashFlowOrganizerModelEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CashFlowOrganizerEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="ProfileInsert" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileInsert_Result)">
+      <Parameter Name="AspNetUsersID" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="SubscriptionID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileIncomeExpenseSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileIncomeExpenseSelect_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileSelectByUserID" ReturnType="Collection(Int32)">
+      <Parameter Name="Id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileAccountInsertUpdate" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileAccountInsertUpdate_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+      <Parameter Name="AccountXML" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileAccountSelect" ReturnType="Collection(String)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileIncomeExpenseInsertUpdate" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileIncomeExpenseInsertUpdate_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+      <Parameter Name="IncomeXML" Mode="In" Type="String" />
+      <Parameter Name="ExpenseXML" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="IncomeAndExpenseDatesSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.IncomeAndExpenseDatesSelect_Result)">
+      <Parameter Name="MaxMonths" Mode="In" Type="Int32" />
+      <Parameter Name="RecurringIncomeAndExpensesXML" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CombinedBalanceSelect" ReturnType="Collection(Decimal)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileSelect_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileDeleteALL" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileDeleteALL_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileUpdate" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileUpdate_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ProfileInfoSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileInfoSelect_Result)">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ProfileInsert_Result">
+    <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+    <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+    <Property Type="Int32" Name="ErrorState" Nullable="true" />
+    <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+    <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="ProfileIncomeExpenseSelect_Result">
+    <Property Type="String" Name="IncomeXML" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="ExpenseXML" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="ProfileAccountInsertUpdate_Result">
+    <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+    <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+    <Property Type="Int32" Name="ErrorState" Nullable="true" />
+    <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+    <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="ProfileIncomeExpenseInsertUpdate_Result">
+    <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+    <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+    <Property Type="Int32" Name="ErrorState" Nullable="true" />
+    <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+    <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="IncomeAndExpenseDatesSelect_Result">
+    <Property Type="String" Name="IncomeOrExpense" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Descr" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="5" />
+    <Property Type="DateTime" Name="NextDate" Nullable="true" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="ProfileSelect_Result">
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="SubscriptionID" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+  </ComplexType>
+  <ComplexType Name="ProfileDeleteALL_Result">
+    <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+    <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+    <Property Type="Int32" Name="ErrorState" Nullable="true" />
+    <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+    <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="ProfileUpdate_Result">
+    <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+    <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+    <Property Type="Int32" Name="ErrorState" Nullable="true" />
+    <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+    <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="ProfileInfoSelect_Result">
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+    <Property Type="Decimal" Name="TotalMoneySaved" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="TotalAvailableFunds" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="AverageMonthlyCashFlow" Nullable="false" Precision="19" />
+  </ComplexType>
+</Schema>
