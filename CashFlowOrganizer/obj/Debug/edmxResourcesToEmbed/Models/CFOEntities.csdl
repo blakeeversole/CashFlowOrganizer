@@ -118,6 +118,6 @@
     <Property Type="String" Name="AspNetUsersID" Nullable="false" MaxLength="128" />
     <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
     <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
-    <Property Type="String" Name="Descr" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="RoleDescr" Nullable="false" MaxLength="100" />
   </ComplexType>
 </Schema>

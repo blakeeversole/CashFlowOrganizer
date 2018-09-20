@@ -112,7 +112,7 @@
           <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Descr" ColumnName="Descr" />
+          <ScalarProperty Name="RoleDescr" ColumnName="RoleDescr" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

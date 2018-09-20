@@ -23,7 +23,7 @@ public partial class AspNetUsersSelect_Result
 
     public string LastName { get; set; }
 
-    public string Descr { get; set; }
+    public string RoleDescr { get; set; }
 
 }
 

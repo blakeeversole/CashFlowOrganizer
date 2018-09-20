@@ -47,7 +47,7 @@ namespace CashFlowOrganizer.Areas.Admin.Controllers
 
                 user.FirstName = item.FirstName;
                 user.LastName = item.LastName;
-                user.Role = item.Descr;
+                user.Role = item.RoleDescr;
 
                 vm.UserList.Add(user);
             }
