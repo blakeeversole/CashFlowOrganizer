@@ -1,0 +1,69 @@
+﻿<div class="container container-fluid">
+    <div class="col-sm-12">
+        
+        <div class="col-sm-4 col-sm-offset-4 topMargin40">
+
+            @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="panel panel-main greyblueBACKGROUND">
+                    <div class="panel-heading text-center greyblueBACKGROUND whiteCOLOR font150">Sign In</div>
+                    <div class="panel-body">
+
+                        <div class="col-sm-12 noPadding">                            
+
+                            <div class="col-sm-12 text-center">
+                                @Html.Label("Username", "Username", htmlAttributes: new { @class = "control-label tallLabel" })
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                @Html.Editor("Username", new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Username" } })
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                @Html.Label("Password", "Password", htmlAttributes: new { @class = "control-label tallLabel" })
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                @Html.Editor("Password", new { htmlAttributes = new { @type = "Password", @class = "form-control tallInput wideInput", @placeholder = "Password" } })
+                            </div>                            
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-block btnHover font125 greyblueBACKGROUND whiteCOLOR">Sign In</button>
+                            </div>
+
+                            <div class="text-center">
+                                <p></p>
+                                <a href="@Url.Action("ForgotUsername","Account")" class="font125 btnHover">Forgot Username?</a>
+                                <p></p>
+                            </div>
+
+                            <div class="text-center">
+                                <p></p>
+                                <a href="@Url.Action("ForgotPassword","Account")" class="font125 btnHover">Forgot Password?</a>
+                                <p></p>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="font125">Don't have an account?</p>
+                            </div>
+                            <div class="text-center">
+                                <a href="@Url.Action("Index","SignUp")" class="font125 btnHover">Sign Up</a>
+                            </div>
+                            <div class="text-center">
+                                <a href="@Url.Action("Index", "LearnMore")" class="font125 btnHover">Learn More</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 text-center font125">
+            @Html.ValidationMessage("Summary")            
+        </div>
+
+    </div>
+    
+
+</div>

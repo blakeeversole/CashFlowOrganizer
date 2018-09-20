@@ -1,0 +1,427 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-default {
+    background-color: #006699 !important; /*red*/
+    background-image: none;
+    color: white !important;
+}
+
+.navbar-default * {
+    color: white !important;
+}
+
+.navbar-brand{
+    font-family:Tahoma !important;
+    font-size: 200% !important;
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+
+.TahomaFont{
+    font-family:Tahoma;
+}
+
+/* COLORS */
+.greenCOLOR{
+    color: green !important;
+}
+
+.whiteCOLOR{
+    color: white !important;
+}
+
+.blackCOLOR{
+    color: black !important;
+}
+
+.redCOLOR{
+    color: #e60000 !important;
+}
+
+.greyCOLOR{
+    color: grey !important;
+}
+
+.greyblueCOLOR{
+    color: #006699 !important;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.lightgreyCOLOR{
+    color: #808080 !important;
+}
+
+/* BACKGROUNDS */
+.orangeredBACKGROUND{
+    background-color: orangered !important; /*green*/
+}
+
+.greenBACKGROUND{
+    background-color: green !important; /*green*/
+}
+
+.whiteBACKGROUND{
+    background-color: white !important;
+}
+
+.greyblueBACKGROUND{
+    background-color: #006699 !important;
+}
+
+.redBACKGROUND{
+    background-color: #e60000 !important; /*#e60000*/
+}
+
+.lightgreyBACKGROUND{
+    background-color: #d9d9d9 !important;
+}
+
+
+/* FONT SIZES */
+.font250{
+    font-size: 250%;
+}
+
+.font200{
+    font-size: 200%
+}
+
+.font175{
+    font-size:175%;
+}
+
+.font150{
+    font-size:150%;
+}
+
+.font125{
+    font-size: 125%;
+}
+
+.font110{
+    font-size: 110%;
+}
+
+/* BORDERS */
+.greenBORDER{
+    border-color: #339933 !important;     
+}
+
+.whiteBORDER{
+    border-color: white !important;
+    border: 2px solid;
+}
+
+.greyblueBORDER{
+    border-color: #006699 !important;
+    border: 2px solid;
+}
+
+.roundBORDER{
+    border-radius:20px 20px 20px 20px !important;
+}
+
+/* HOVER */
+.btnHover {
+    transition: .5s;
+    -webkit-transition: .5s;
+}
+
+.btnHover:hover{
+    font-size: 150%;
+    transition: .5s;
+    -webkit-transition: .5s;
+    cursor: pointer;
+}
+
+.btnHoverSM {
+    transition: .5s;
+    -webkit-transition: .5s;
+}
+
+.btnHoverSM:hover{
+    font-size: 120%;
+    transition: .5s;
+    -webkit-transition: .5s;
+    cursor: pointer;
+}
+
+.btnHoverLg:hover{
+    font-size: 225%;
+    transition: .5s;
+    -webkit-transition: .5s;
+    cursor: pointer;
+}
+
+.btnHoverLg{
+     transition: .5s;
+    -webkit-transition: .5s;
+}
+
+/* ALIGNMENT */
+.valignByBTN {
+  padding: 6px 12px;
+}
+
+/* PANELS */
+.panel-main{    
+    border: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.panel-main > .panel-body{
+    background-color: white;
+    
+}
+
+.panel-main > .panel-body * input,
+.panel-main > .panel-body * select,
+.panel-main > .panel-body * option {
+    color:black !important;
+    font-weight: 550;
+}
+
+/* INPUT FIELDS */
+.tallInput{    
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.tallLabel{
+    font-size: 125%;
+}
+
+.wideInput{
+    max-width: 1000px !important;
+    width: 100% !important;
+}
+
+.inlineDDL{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 13px;
+}
+
+.inlineLabel{    
+    padding-top: 5px;
+}
+
+.trashIcon{
+    padding-right:1px !important;
+    padding-top:3px !important;
+}
+
+/* PADDINGS AND MARGINS */
+.noPadding{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.noBottomMargin{
+    margin-bottom: 0px;
+}
+
+.rightPadding{
+    padding-left: 0px;
+    padding-right: 8px;
+}
+
+.leftPadding{
+    padding-left: 8px;
+    padding-right: 0px;
+}
+
+.topMargin20 {
+    margin-top: 20px;
+}
+
+.topMargin40 {
+    margin-top: 40px !important;
+}
+
+/* VALIDATION */
+ .input-validation-error {
+        border: 2px solid red /*#ff6600*/;
+}
+
+.field-validation-error{
+    color: red;
+    font-weight: bold;
+    font-size: 125%;
+}
+
+
+/*********************** TABS **********************/
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+.nav-tabs > li > a {
+    border-radius: 10px 10px 0px 0px !important;
+    font-size: 140% !important;
+    background-color: #006699 !important;
+    color: white !important;
+}
+
+.nav-tabs > .active > a {
+    border-radius: 10px 10px 0px 0px !important;
+    font-size: 140% !important;
+    background-color: white !important;
+    color: #336699 !important;
+    font-weight:bold;
+}
+
+.nav-tabs > li > a:hover {
+   font-size: 160% !important;
+    transition: .5s;
+    -webkit-transition: .5s;
+    cursor: pointer !important;
+}
+
+.nav-tabs > li > a {
+    transition: .5s;
+    -webkit-transition: .5s;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+
+/* CURSOR */
+
+.pointer{
+    cursor: pointer !important;
+}
+
+.cashFlowTBL{
+    border: none !important;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.scrollDiv{
+    height: 600px;
+    overflow-y: scroll;
+}
+
+.tooltip > .tooltip-inner {
+    background-color: #006699 !important;
+    color: white;
+    font-size: 125%;
+}
+
+.tooltip.top > .tooltip-arrow
+{
+    border-top: 5px solid #006699;
+}
+
+.popover,
+.popover-title,
+.popover-content
+{
+    color: #006699;
+    background-color:white;
+}
+
+.popover-title{
+    font-size: 150%;
+}
+
+.confirmation-buttons > div > a{
+     font-size: 105% !important;
+     transition: .5s;
+    -webkit-transition: .5s;
+}
+
+.confirmation-buttons > div > a:hover{
+    font-size: 125% !important;
+    transition: .5s;
+    -webkit-transition: .5s;
+}
+
+#spinnerProcessing
+{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.8);
+    z-index:1000;
+}
+
+@keyframes spinner-line-fade-more {
+  0%, 100% {
+    opacity: 0; /* minimum opacity */
+  }
+  1% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-line-fade-quick {
+  0%, 39%, 100% {
+    opacity: 0.25; /* minimum opacity */
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-line-fade-default {
+  0%, 100% {
+    opacity: 0.22; /* minimum opacity */
+  }
+  1% {
+    opacity: 1;
+  }
+}
+
+.imgBorder{
+    border: 0;
+    box-shadow: 0px -2px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #006699;
+}

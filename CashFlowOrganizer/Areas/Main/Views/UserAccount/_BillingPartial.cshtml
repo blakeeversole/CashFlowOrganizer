@@ -1,0 +1,76 @@
+﻿
+@model CashFlowOrganizer.Areas.Main.Models.UserAccount
+
+@using (Ajax.BeginForm("UpdateBilling", "UserAccount", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Billing", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Raw(TempData["BillingMSG"])
+
+    <div class="col-sm-12 noPadding">
+        <div class="noPadding">
+            @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "First Name" } })
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+        <div class="noPadding">
+            @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Last Name" } })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+        <div class="noPadding">
+            @Html.LabelFor(m => m.Billing.Address, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.EditorFor(m => m.Billing.Address, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Address" } })
+            @Html.ValidationMessageFor(m => m.Billing.Address)
+        </div>
+        <div class="noPadding">
+            @Html.LabelFor(m => m.Billing.City, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.EditorFor(m => m.Billing.City, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "City" } })
+            @Html.ValidationMessageFor(m => m.Billing.City)
+        </div>
+        <div class="noPadding">
+            @Html.LabelFor(m => m.Billing.State, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.DropDownListFor(m => m.Billing.State, new SelectList(Model.Billing.StateDDL, "key", "value"), "-- Select State --", htmlAttributes: new { @class = "form-control tallInput" })
+            @Html.ValidationMessageFor(m => m.Billing.State)
+        </div>
+        <div class="noPadding">
+            @Html.LabelFor(m => m.Billing.Zipcode, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.EditorFor(m => m.Billing.Zipcode, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Zipcode" } })
+            @Html.ValidationMessageFor(m => m.Billing.Zipcode)
+        </div>
+
+        <div class="noPadding">
+            @Html.LabelFor(m => m.Billing.CardNumber, htmlAttributes: new { @class = "control-label tallLabel" })
+            @Html.EditorFor(m => m.Billing.CardNumber, new { htmlAttributes = new { @class = "form-control tallInput wideInput" } })
+            @Html.ValidationMessageFor(m => m.Billing.CardNumber)
+        </div>
+
+        <div class="col-sm-5">
+            <label class="control-label inlineLabel tallLabel">Expiration Date</label>
+        </div>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(m => m.Billing.ExpirationMonth, new SelectList(Model.Billing.MonthDDL, "key", "value"), "-- Month --", htmlAttributes: new { @class = "form-control tallInput wideInput" })
+            @Html.ValidationMessageFor(m => m.Billing.ExpirationMonth)
+        </div>
+        <div class="col-sm-3">
+            @Html.DropDownListFor(m => m.Billing.ExpirationYear, new SelectList(Model.Billing.YearDDL, "key", "value"), "-- Year --", htmlAttributes: new { @class = "form-control tallInput wideInput" })
+            @Html.ValidationMessageFor(m => m.Billing.ExpirationYear)
+        </div>
+
+        <div class="col-sm-5">
+            @Html.LabelFor(m => m.Billing.SecurityCode, htmlAttributes: new { @class = "control-label inlineDDL tallLabel" })
+        </div>
+        <div class="col-sm-4">
+            @Html.EditorFor(m => m.Billing.SecurityCode, new { htmlAttributes = new { @class = "form-control tallInput wideInput" } })
+            @Html.ValidationMessageFor(m => m.Billing.SecurityCode)
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+
+    
+
+    <div clas="col-sm-12 text-center">@Html.ValidationMessage("Summary")</div>
+
+    <div class="text-center col-sm-8 col-sm-offset-2">
+        <button type="submit" class="btn btn-block btnHover font125 greyblueBACKGROUND whiteCOLOR roundBORDER">Update Billing Information</button>
+    </div>
+}  
+

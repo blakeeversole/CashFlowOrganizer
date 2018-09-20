@@ -1,0 +1,271 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.CashFlowViewModel
+
+@using (Ajax.BeginForm("UpdateCashFlow", "IncomeExpense", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "CashFlowPartial", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Raw(TempData["msg"])
+
+    <div class="col-sm-12 topMargin40 noPadding">
+
+        <div class="col-sm-6 whiteBACKGROUND noPadding">        
+            <h1 class="blackCOLOR">Income and Expenses</h1>     
+        </div>
+
+        <div class="col-sm-6 noPadding">
+
+            <div class="panel panel-main greyblueBACKGROUND">
+                <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Average Monthly Cash Flow</div>
+                <div class="panel-body">
+                    <h1 class="text-center"><span id="totalCashFlow"></span></h1>
+                </div>
+            </div>
+
+        </div>        
+
+        <div class="noPadding col-sm-12">
+            <div class="col-sm-3 noPadding">               
+                <button type="submit" id="SubmitButton" class="btn btn-block btn-lg btnHover greyblueBACKGROUND whiteCOLOR roundBORDER"><i class="fa fa-cloud-download font110"></i><span id="saveChanges"> Save Changes</span></button>
+                <p></p>
+            </div>     
+            <div class="col-sm-7 noPadding">
+            </div>
+            <div class="col-sm-2 noPadding">
+                <button type="button" class="btn btn-block btn-lg btnHover" style="color: white; background-color: orangered" data-toggle="modal" data-target="#myModal"><i class="fa fa-yelp font110"></i> Need Help?</button>
+                <p></p>
+            </div>   
+        </div>
+
+    </div>    
+
+    <div class="col-sm-12 noPadding">
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading text-center greyblueBACKGROUND whiteCOLOR font200">Income</div>
+            <div class="panel-body">
+
+                @if (Model.IncomeList.Count == 0)
+                {
+                    <div class="col-sm-6 col-sm-offset-3 noPadding">
+                        <button type="submit" name="submitIncome" value="Add" class="btn btn-lg btn-block font125 whiteCOLOR btnHover orangeredBACKGROUND">Add Income</button>
+                    </div>               
+                }
+                else
+                {
+                    <div class="col-sm-1 text-center noPadding font125"></div>
+                    <div class="col-sm-3 text-center noPadding font125"><strong>Description</strong></div>
+                    <div class="col-sm-2 text-center noPadding font125"><strong>Frequency</strong></div>
+                    <div class="col-sm-3 text-center noPadding font125"><strong>Date</strong></div>
+                    <div class="col-sm-2 text-center noPadding font125"><strong>Amount</strong></div>
+
+                    <div class="noPadding" id="sortableIncome">
+                        @for (int i = 0; i < Model.IncomeList.Count; i++)
+                    {
+                            <div class="form-group col-sm-12 noPadding incomeItem noBottomMargin">
+
+                                @Html.HiddenFor(m => m.IncomeList[i].SubID, new { @class = "incomeSubId" })
+                                @Html.HiddenFor(m => m.IncomeList[i].ProfileFinanceID)
+
+                                <div class="col-sm-1 noPadding text-center inlineLabel font200 greyCOLOR handle pointer">
+                                    <i class="fa fa-sort" data-toggle="tooltip" data-placement="top" data-container="body" title="Drag to sort"></i>
+                                </div>
+
+                                <div class="col-sm-3 noPadding">
+                                    @Html.EditorFor(m => m.IncomeList[i].Descr, new { htmlAttributes = new { @class = "form-control wideInput tallInput roundBORDER", @placeholder = "Example: Job, Part-Time Work..." } })
+                                    @Html.ValidationMessageFor(m => m.IncomeList[i].Descr)
+                                </div>
+
+                                <div class="col-sm-2 noPadding">
+                                    @Html.DropDownListFor(m => m.IncomeList[i].Type, new SelectList(Model.TypeDDL, "key", "value", Model.IncomeList[i].Type), "SELECT", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER incomeType ddl" })
+                                    @Html.ValidationMessageFor(m => m.IncomeList[i].Type)
+                                </div>
+
+
+                                @if (Model.IncomeList[i].Type == "MON")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        @Html.DropDownListFor(m => m.IncomeList[i].DayOfMonth, new SelectList(Model.DayOfMonthDDL, "key", "value", Model.IncomeList[i].DayOfMonth), "SELECT PAYMENT DATE", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                        @Html.ValidationMessageFor(m => m.IncomeList[i].DayOfMonth)
+                                    </div>
+                                }
+                                else if (Model.IncomeList[i].Type == "SEM")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        <div class="col-sm-6 noPadding">
+                                            @Html.DropDownListFor(m => m.IncomeList[i].DayOfMonthFirst, new SelectList(Model.DayOfMonthDDL, "key", "value", Model.IncomeList[i].DayOfMonthFirst), "SELECT PAYMENT DATE", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                            @Html.ValidationMessageFor(m => m.IncomeList[i].DayOfMonthFirst)
+                                        </div>
+                                        <div class="col-sm-6 noPadding">
+                                            @Html.DropDownListFor(m => m.IncomeList[i].DayOfMonthSecond, new SelectList(Model.DayOfMonthDDL, "key", "value", Model.IncomeList[i].DayOfMonthSecond), "SELECT PAYMENT DATE ", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                            @Html.ValidationMessageFor(m => m.IncomeList[i].DayOfMonthSecond)
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.IncomeList[i].Type == "BWE")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        @Html.DropDownListFor(m => m.IncomeList[i].DayOfTwoWeek, new SelectList(Model.DayOfTwoWeekDDL, "key", "value", Model.IncomeList[i].DayOfTwoWeek), "SELECT NEXT PAYMENT", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                        @Html.ValidationMessageFor(m => m.IncomeList[i].DayOfTwoWeek)
+                                    </div>
+                                }
+                                else if (Model.IncomeList[i].Type == "WEE")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        @Html.DropDownListFor(m => m.IncomeList[i].DayOfWeek, new SelectList(Model.DayOfWeekDDL, "key", "value", Model.IncomeList[i].DayOfWeek), "SELECT PAYMENT DAY", htmlAttributes: new { @class = "form-control formWide wideInput tallInput roundBORDER" })
+                                        @Html.ValidationMessageFor(m => m.IncomeList[i].DayOfWeek)
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-3 text-center inlineLabel tallLabel noPadding"></div>
+                                }
+
+                                <div class="col-sm-2 noPadding">
+                                    @Html.EditorFor(m => m.IncomeList[i].Amount, new { htmlAttributes = new { @class = "form-control formTall text-right wideInput tallInput incomeAmount roundBORDER" } })
+                                    @Html.ValidationMessageFor(m => m.IncomeList[i].Amount)
+                                </div>
+
+                                
+                                    <div class="col-sm-1 inlineLabel"><button type="submit" name="submitIncome" value="Remove @Model.IncomeList[i].SubID" class="btn incomeRemoveButton"><i class="fa fa-trash-o font150"></i></button></div>
+                   
+
+                            </div>
+                        }
+                    </div>
+
+
+
+                    <div class="form-group col-sm-12 noPadding">
+                        <div class="col-sm-2 col-sm-offset-1 noPadding">
+                            <button type="submit" name="submitIncome" value="Add" class="btn btn-block font125 whiteCOLOR btnHover orangeredBACKGROUND">Add Income</button>
+                        </div>
+                        <div class="col-sm-6 text-right valignByBTN noPadding">
+                            <strong class="font125">Average Monthly Income:</strong>
+                        </div>
+                        <div class="col-sm-2 text-right valignByBTN noPadding" style="padding-right: 12px">
+                            <strong><span id="incomeTotal" class="font125"></span></strong>
+                        </div>
+                    </div>
+                }               
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 noPadding" style="margin-bottom:80px;">
+        <div class="panel panel-main">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR text-center font200">Expenses</div>
+            <div class="panel-body">
+
+                @if (Model.ExpenseList.Count == 0)
+                {
+                    <div class="col-sm-6 col-sm-offset-3 noPadding">
+                        <button type="submit" name="submitExpense" value="Add" class="btn btn-lg btn-block font125 whiteCOLOR btnHover orangeredBACKGROUND">Add Expense</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-1 text-center noPadding font125"></div>
+                    <div class="col-sm-3 text-center noPadding font125"><strong>Description</strong></div>
+                    <div class="col-sm-2 text-center noPadding font125"><strong>Frequency</strong></div>
+                    <div class="col-sm-3 text-center noPadding font125"><strong>Date</strong></div>
+                    <div class="col-sm-2 text-center noPadding font125"><strong>Amount</strong></div>
+
+                    <div class="noPadding" id="sortableExpense">
+                        @for (int i = 0; i < Model.ExpenseList.Count; i++)
+                        {
+                            <div class="form-group col-sm-12 noPadding expenseItem noBottomMargin">
+
+                                @Html.HiddenFor(m => m.ExpenseList[i].SubID, new { @class = "expenseSubId" })
+                                @Html.HiddenFor(m => m.ExpenseList[i].ProfileFinanceID)
+
+                                <div class="col-sm-1 noPadding text-center inlineLabel font200 greyCOLOR handle pointer">
+                                    <i class="fa fa-sort" data-toggle="tooltip" data-placement="top" data-container="body" title="Drag to sort"></i>
+                                </div>
+
+                                <div class="col-sm-3 noPadding">
+                                    @Html.EditorFor(m => m.ExpenseList[i].Descr, new { htmlAttributes = new { @class = "form-control wideInput tallInput roundBORDER", @placeholder = "Example: Rent, Car, Utilities..." } })
+                                    @Html.ValidationMessageFor(m => m.ExpenseList[i].Descr)
+                                </div>
+
+                                <div class="col-sm-2 noPadding">
+                                    @Html.DropDownListFor(m => m.ExpenseList[i].Type, new SelectList(Model.TypeDDL, "key", "value", Model.ExpenseList[i].Type), "SELECT", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER ddl expenseType" })
+                                    @Html.ValidationMessageFor(m => m.ExpenseList[i].Type)
+                                </div>
+
+
+                                @if (Model.ExpenseList[i].Type == "MON")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        @Html.DropDownListFor(m => m.ExpenseList[i].DayOfMonth, new SelectList(Model.DayOfMonthDDL, "key", "value", Model.ExpenseList[i].DayOfMonth), "SELECT PAYMENT DATE", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                        @Html.ValidationMessageFor(m => m.ExpenseList[i].DayOfMonth)
+                                    </div>
+                                }
+                                else if (Model.ExpenseList[i].Type == "SEM")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        <div class="col-sm-6 noPadding">
+                                            @Html.DropDownListFor(m => m.ExpenseList[i].DayOfMonthFirst, new SelectList(Model.DayOfMonthDDL, "key", "value", Model.ExpenseList[i].DayOfMonthFirst), "SELECT PAYMENT DATE", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                            @Html.ValidationMessageFor(m => m.ExpenseList[i].DayOfMonthFirst)
+                                        </div>
+                                        <div class="col-sm-6 noPadding">
+                                            @Html.DropDownListFor(m => m.ExpenseList[i].DayOfMonthSecond, new SelectList(Model.DayOfMonthDDL, "key", "value", Model.ExpenseList[i].DayOfMonthSecond), "SELECT PAYMENT DATE ", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                            @Html.ValidationMessageFor(m => m.ExpenseList[i].DayOfMonthSecond)
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.ExpenseList[i].Type == "BWE")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        @Html.DropDownListFor(m => m.ExpenseList[i].DayOfTwoWeek, new SelectList(Model.DayOfTwoWeekDDL, "key", "value", Model.ExpenseList[i].DayOfTwoWeek), "SELECT NEXT PAYMENT", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                        @Html.ValidationMessageFor(m => m.ExpenseList[i].DayOfTwoWeek)
+                                    </div>
+                                }
+                                else if (Model.ExpenseList[i].Type == "WEE")
+                                {
+                                    <div class="col-sm-3 noPadding">
+                                        @Html.DropDownListFor(m => m.ExpenseList[i].DayOfWeek, new SelectList(Model.DayOfWeekDDL, "key", "value", Model.ExpenseList[i].DayOfWeek), "SELECT PAYMENT DAY", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER" })
+                                        @Html.ValidationMessageFor(m => m.ExpenseList[i].DayOfWeek)
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-3 text-center DDLInlineLabel formTallLabel noPadding">
+
+                                    </div>
+                                }
+
+                                <div class="col-sm-2 noPadding">
+                                    @Html.EditorFor(m => m.ExpenseList[i].Amount, new { htmlAttributes = new { @class = "form-control text-right wideInput tallInput roundBORDER expenseAmount" } })
+                                    @Html.ValidationMessageFor(m => m.ExpenseList[i].Amount)
+                                </div>
+
+                               
+                                <div class="col-sm-1 inlineLabel"><button type="submit" name="submitExpense" value="Remove @Model.ExpenseList[i].SubID" class="btn expenseRemoveButton"><i class="fa fa-trash-o font150"></i></button></div>
+
+
+                            </div>
+                        }
+                    </div>
+
+
+
+                    <div class="form-group col-sm-12 noPadding">
+                        <div class="col-sm-2 col-sm-offset-1 noPadding">
+                            <button type="submit" name="submitExpense" value="Add" class="btn btn-block font125 whiteCOLOR btnHover orangeredBACKGROUND">Add Expense</button>
+                        </div>
+                        <div class="col-sm-6 text-right valignByBTN noPadding">
+                            <strong class="font125">Average Monthly Expenses:</strong>
+                        </div>
+                        <div class="col-sm-2 text-right valignByBTN noPadding" style="padding-right: 12px">
+                            <strong><span id="expenseTotal" class="font125"></span></strong>
+                        </div>
+                    </div>
+                }               
+
+            </div>
+        </div>
+    </div>
+
+    <button id="refreshButton" type="submit" name="submitRefresh" value="refreshDDL" class="hidden"></button>
+    <button id="checkButton" type="submit" name="submitCheck" value="check" class="hidden"></button>
+}
+
+<script src="~/Scripts/CashFlowCalculations.js"></script>

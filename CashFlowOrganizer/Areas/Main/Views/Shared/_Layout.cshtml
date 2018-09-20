@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Flow Organizer</title>
+    <meta name="description" content="Why stress about money? Manage your personal finances without the hassle.">
+    <meta name="keywords" content="Cash Flow, Money Management, Budget, Money Manager, Easy, Simple">
+    <link rel="icon" href="~/Content/images/CFO.png?v=2" type="image/png" sizes="16x16">  
+
+    @Styles.Render("~/Content/EveryPageContent")
+    @Scripts.Render("~/bundles/EveryPageScript")
+
+</head>
+<body>
+    <div id="spinnerProcessing"></div>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index","Dashboard")" class="navbar-brand">Cash Flow Organizer</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="margin-top: 10px;margin-bottom: 10px;">
+                    <li><a class="font125 btnHover" href="@Url.Action("Index", "Dashboard")">Dashboard</a></li>
+                    <li><a class="font125 btnHover" href="@Url.Action("Index", "IncomeExpense")">Income/Expenses</a></li>
+                    <li><a class="font125 btnHover" href="@Url.Action("Index", "FinancialAccounts")">Financial Accounts</a></li>                
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-top: 10px;margin-bottom: 10px;">
+                    <li><a class="font125 btnHover" href="@Url.Action("Index", "UserAccount")">Your Account</a></li>
+                    <li><a class="font125 btnHover" href="@Url.Action("SignOut", "Account", new { area = "" })">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="footer text-center font150 whiteCOLOR">
+            Need additional help?... Contact us at Support@CashFlowOrganizer.com
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+
+

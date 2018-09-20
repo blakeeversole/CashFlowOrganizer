@@ -1,0 +1,133 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.FinancialAccountViewModel
+
+@using (Ajax.BeginForm("UpdateAccounts", "FinancialAccounts", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "AccountPartial", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Raw(TempData["msg"])
+
+    <div class="col-sm-12 topMargin40 noPadding">
+
+        <div class="col-sm-6 whiteBACKGROUND noPadding" style="margin-bottom: 40px;">
+            <h1 class="blackCOLOR">Financial Accounts</h1>
+        </div>
+
+        <div class="col-sm-6 noPadding">
+        </div>
+
+        <div class="noPadding col-sm-12">
+            <div class="col-sm-3 noPadding">
+                <button type="submit" id="SubmitButton" class="btn btn-block btn-lg btnHover greyblueBACKGROUND whiteCOLOR roundBORDER"><i class="fa fa-cloud-download font110"></i> Save Changes</button>
+                <p></p>
+            </div>
+            <div class="col-sm-7 noPadding">
+            </div>
+            <div class="col-sm-2 noPadding">
+                <button type="button" class="btn btn-block btn-lg btnHover" style="color: white; background-color: orangered" data-toggle="modal" data-target="#myModal"><i class="fa fa-yelp font110"></i> Need Help?</button>
+                <p></p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-12 noPadding" style="margin-bottom:80px;">
+
+        @Html.ValidationMessage("RandomError")
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading text-center greyblueBACKGROUND whiteCOLOR font200">Accounts</div>
+            <div class="panel-body">
+
+                @if (Model.AccountList.Count == 0)
+                {
+                    <div class="col-sm-12 noPadding">
+                        <div class="col-sm-6 col-sm-offset-3 noPadding">
+                            <button type="submit" name="submitAccount" value="Add" class="btn btn-lg btn-block font125 whiteCOLOR btnHover orangeredBACKGROUND">Add Account</button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-1 text-center noPadding font125"></div>
+                    <div class="col-sm-3 text-center noPadding font125"><strong>Description</strong></div>
+                    <div class="col-sm-2 text-center noPadding font125" data-toggle="tooltip" data-placement="bottom" data-container="body" title="A POSITIVE account is where the balance is money you have saved (such as a check or savings account). A NEGATIVE account is where the balance is money you have spent (such as a credit card account)."><strong>Account Type <i class="fa fa-question-circle"></i></strong></div>
+                    <div class="col-sm-3 noPadding">
+                        <div class="col-sm-6 text-center noPadding font125"><strong>Maximum Balance</strong></div>
+                        <div class="col-sm-6 text-center noPadding font125"><strong>Current Balance</strong></div>
+                    </div>
+                    <div class="col-sm-2 text-center noPadding font125" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Select whether or not you want this account included in your daily cash flow balance. If expenses are withdrawn or income is deposited into an account it is generally a good idea to include the account in your cash flow analysis."><strong>Include In Cash Flow Analysis? <i class="fa fa-question-circle"></i></strong></div>
+
+                    <div class="noPadding" id="sortableAccount">
+                        @for (int i = 0; i < Model.AccountList.Count; i++)
+                        {
+                            <div class="form-group col-sm-12 noPadding accountItem noBottomMargin">
+
+                                @Html.HiddenFor(m => m.AccountList[i].SubID, new { @class = "accountSubId" })
+                                @Html.HiddenFor(m => m.AccountList[i].ProfileAccountID)
+
+                                <div class="col-sm-1 noPadding text-center inlineLabel font200 greyCOLOR handle pointer">
+                                    <i class="fa fa-sort" data-toggle="tooltip" data-placement="top" data-container="body" title="Drag to sort"></i>
+                                </div>
+
+                                <div class="col-sm-3 noPadding">
+                                    @Html.EditorFor(m => m.AccountList[i].Descr, new { htmlAttributes = new { @class = "form-control wideInput tallInput roundBORDER", @placeholder = "Example: Checkings, Savings, Credit Card..." } })
+                                    @Html.ValidationMessageFor(m => m.AccountList[i].Descr)
+                                </div>
+
+                                <div class="col-sm-2 noPadding">
+                                    @Html.DropDownListFor(m => m.AccountList[i].Type, new SelectList(Model.AccountTypeDDL, "key", "value", Model.AccountList[i].Type), "SELECT", htmlAttributes: new { @class = "form-control wideInput tallInput roundBORDER ddl" })
+                                    @Html.ValidationMessageFor(m => m.AccountList[i].Type)
+                                </div>
+
+                                <div class="col-sm-3 noPadding">
+                                    @if (Model.AccountList[i].Type == "NEG")
+                                    {
+                                        <div class="col-sm-6 noPadding">
+                                            @Html.EditorFor(m => m.AccountList[i].MaximumBalance, new { htmlAttributes = new { @class = "form-control wideInput tallInput roundBORDER text-right" } })
+                                            @Html.ValidationMessageFor(m => m.AccountList[i].MaximumBalance)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-6 noPadding"></div>
+                                    }
+
+                                    <div class="col-sm-6 noPadding">
+                                        @Html.EditorFor(m => m.AccountList[i].Balance, new { htmlAttributes = new { @class = "form-control wideInput tallInput roundBORDER text-right" } })
+                                        @Html.ValidationMessageFor(m => m.AccountList[i].Balance)
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2 noPadding text-center font250 redCOLOR">
+                                    <span class="includeInCashFlowSelect">
+                                        <span class="spanForCheckbox"></span>
+                                        @Html.CheckBoxFor(m => m.AccountList[i].IncludeInCashFlow, htmlAttributes: new { @class = "includeInCashFlow" })
+                                    </span>
+
+                                </div>
+                                
+                                <div class="col-sm-1 inlineLabel"><button type="submit" name="submitAccount" value="Remove @Model.AccountList[i].SubID" class="btn accountRemoveButton"><i class="fa fa-trash-o font150"></i></button></div>
+
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="form-group col-sm-12 noPadding">
+                        <div class="col-sm-2 col-sm-offset-1 noPadding">
+                            <button type="submit" name="submitAccount" value="Add" class="btn btn-block font125 whiteCOLOR btnHover orangeredBACKGROUND">Add Account</button>
+                        </div>
+                    </div>
+                }               
+
+            </div>
+        </div>
+    </div>    
+
+    <button id="refreshButton" type="submit" name="submitRefresh" value="refreshDDL" class="hidden"></button>
+}
+
+
+
+<script src="~/Scripts/AccountCalculations.js"></script>
+
+

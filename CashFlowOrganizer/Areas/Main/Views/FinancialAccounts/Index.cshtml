@@ -1,0 +1,33 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.FinancialAccountViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading text-center greyblueBACKGROUND whiteCOLOR font150">Instructions</div>
+            <div class="panel-body">
+                <h4>Enter any bank or credit card accounts that you might have. Don't worry, we do not request any bank or credit card account information. You will need to update the balances of your accounts when they change.</h4>
+                <ul class="font125">
+                    <li>A <strong>POSITIVE</strong> account is where the balance is money you have saved (such as a check or savings account).</li>
+                    <li>A <strong>NEGATIVE</strong> account is where the balance is money you have spent (such as a credit card account).</li>
+                </ul>
+                <h4>For each account you are able to select whether or not the account is included in your Cash Flow Analysis.</h4>
+                <h4>If you choose to include a NEGATIVE account in your cash flow analysis the Maximum Balance minus the Current Balance will be added to your cash flow totals.</h4>
+                <div class="modal-footer">
+                    <button type="button" class="btn whiteCOLOR greyblueBACKGROUND font125 btnHover" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-sm-12 noPadding topMargin20">
+    <div class="noPadding" id="AccountPartial">
+        @Html.Partial("_AccountPartial", Model)
+    </div>
+</div>

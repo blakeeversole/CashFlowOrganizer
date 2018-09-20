@@ -1,0 +1,325 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.CashFlowModels
+
+
+<div class="col-sm-12 noPadding topMargin20" style="margin-bottom:80px;">
+    <div class="col-sm-12 noPadding">
+
+        <div class="col-sm-8 noPadding">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#monthly">Monthly Cash Flow</a></li>
+                <li><a data-toggle="tab" href="#weekly">Weekly Cash Flow</a></li>
+                <li><a data-toggle="tab" href="#daily">Daily Cash Flow</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-4 noPadding">
+            <div class="col-sm-12 noPadding">
+                <label class="col-sm-7 inlineDDL tallLabel text-right">Show Cash Flow For: &nbsp;&nbsp;&nbsp;</label>
+                <div class="col-sm-5 noPadding">
+                    @using (Ajax.BeginForm("UpdateDashboard", "Dashboard", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "CashFlowViews", InsertionMode = InsertionMode.Replace }, new { id = "AjaxForm" }))
+                    {
+                        @Html.DropDownList("NumberOfMonths", new SelectList(Model.CashFlowMonthsDDL, "key", "value", Model.Month), htmlAttributes: new { @class = "form-control tallInput wideInput ddl" })
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
+
+    <div class="tab-content topMargin40">
+        <div id="monthly" class="tab-pane fade in active">
+
+            @if (Model.AccountList.Count == 0 || Model.MonthList.Count == 0)
+            {
+                <div class="col-sm-12 noPadding" style="padding-top: 0px;">
+                    <h1 class="text-center greyblueCOLOR">Not Enough Information To Display Cash Flow</h1>
+                    <div class="col-sm-6 col-sm-offset-3 noPadding">
+                        <ul class="font125">
+                            <li><strong>Income/Expense Could Be Missing</strong> - You must have at least one income or expense entered.</li>
+                            <li><strong>Financial Account Could Be Missing</strong> - You must have at least one financial account entered that is included in your cash flow.</li>
+                            <li><strong>Click on "New User" on how to get started using CashFlow Organizer.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                for (int i = 0; i < Model.MonthList.Count; i++)
+                {
+                    <div class="panel panel-main greyblueBACKGROUND topMargin20">
+                        <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">@Model.MonthList[i].MonthName</div>
+                        <div class="panel-body">
+
+                            <div class="col-sm-12 noPadding">
+                                <div class="col-sm-6 noPadding" style="padding-right:5px;">
+
+                                    <div class="panel panel-main greenBACKGROUND">
+                                        <div class="panel-heading whiteCOLOR greenBACKGROUND font125">Income</div>
+                                        <div class="panel-body">
+                                            @if (Model.MonthList[i].IncomeList.Count == 0)
+                                            {
+                                                <div class="col-sm-6 col-sm-offset-3 text-center font125 whiteCOLOR greenBACKGROUND roundBORDER">No Income</div>
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < Model.MonthList[i].IncomeList.Count; x++)
+                                                {
+                                                    <div class="col-sm-4 text-right">
+                                                        <p class="font125">@string.Format("{0:C}", Model.MonthList[i].IncomeList[x].Amount)</p>
+                                                    </div>
+                                                    <div class="col-sm-8 text-left">
+                                                        <p class="font125">@Model.MonthList[i].IncomeList[x].Descr (@Model.MonthList[i].IncomeList[x].Date.ToString("dddd, MMMM dd"))</p>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-6 noPadding" style="padding-left:5px;">
+                                    <div class="panel panel-main greenBACKGROUND">
+                                        <div class="panel-heading whiteCOLOR redBACKGROUND font125">Expenses</div>
+                                        <div class="panel-body">
+                                            @if (Model.MonthList[i].ExpenseList.Count == 0)
+                                            {
+                                                <div class="col-sm-6 col-sm-offset-3 text-center font125 whiteCOLOR redBACKGROUND roundBORDER">No Expenses</div>
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < Model.MonthList[i].ExpenseList.Count; x++)
+                                                {
+                                                    <div class="col-sm-4 text-right">
+                                                        <p class="font125">@string.Format("{0:C}", Model.MonthList[i].ExpenseList[x].Amount)</p>
+                                                    </div>
+                                                    <div class="col-sm-8 text-left">
+                                                        <p class="font125">@Model.MonthList[i].ExpenseList[x].Descr (@Model.MonthList[i].ExpenseList[x].Date.ToString("dddd, MMMM dd"))</p>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 noPadding">
+                                @if (Model.MonthList[i].CombinedBalance < 0)
+                                {
+                                    <span class="font150 bold redCOLOR" data-toggle="tooltip" data-placement="top" data-container="body" title="This is the combined balance of all of your accounts included in your Cash Flow Analysis at the end of this month">@string.Format("{0:C}", Model.MonthList[i].CombinedBalance) <i class="fa fa-question-circle"></i></span>
+                                }
+                                else
+                                {
+                                    <span class="font150 bold greenCOLOR" data-toggle="tooltip" data-placement="top" data-container="body" title="This is the combined balance of all of your accounts included in your Cash Flow Analysis at the end of this month">+@string.Format("{0:C}", Model.MonthList[i].CombinedBalance) <i class="fa fa-question-circle"></i></span>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+        <div id="weekly" class="tab-pane fade">
+
+            @if (Model.AccountList.Count == 0 || Model.WeekList.Count == 0)
+            {
+                <div class="col-sm-12 noPadding" style="padding-top: 0px;">
+                    <h1 class="text-center greyblueCOLOR">Not Enough Information To Display Cash Flow</h1>
+                    <div class="col-sm-6 col-sm-offset-3 noPadding">
+                        <ul class="font125">
+                            <li><strong>Income/Expense Could Be Missing</strong> - You must have at least one income or expense entered.</li>
+                            <li><strong>Financial Account Could Be Missing</strong> - You must have at least one financial account entered that is included in your cash flow.</li>
+                            <li><strong>Click on "New User" on how to get started using CashFlow Organizer.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                for (int i = 0; i < Model.WeekList.Count; i++)
+                {
+                    <div class="panel panel-main greyblueBACKGROUND topMargin20">
+                        <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Week of @Model.WeekList[i].DateRange</div>
+                        <div class="panel-body">
+
+                            <div class="col-sm-12 noPadding">
+                                <div class="col-sm-6 noPadding" style="padding-right:5px;">
+
+                                    <div class="panel panel-main greenBACKGROUND">
+                                        <div class="panel-heading whiteCOLOR greenBACKGROUND font125">Income</div>
+                                        <div class="panel-body">
+                                            @if (Model.WeekList[i].IncomeList.Count == 0)
+                                            {
+                                                <div class="col-sm-6 col-sm-offset-3 text-center font125 whiteCOLOR greenBACKGROUND roundBORDER">No Income</div>
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < Model.WeekList[i].IncomeList.Count; x++)
+                                                {
+                                                    <div class="col-sm-4 text-right">
+                                                        <p class="font125">@string.Format("{0:C}", Model.WeekList[i].IncomeList[x].Amount)</p>
+                                                    </div>
+                                                    <div class="col-sm-8 text-left">
+                                                        <p class="font125">@Model.WeekList[i].IncomeList[x].Descr (@Model.WeekList[i].IncomeList[x].Date.ToString("dddd, MMMM dd"))</p>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-6 noPadding" style="padding-left:5px;">
+                                    <div class="panel panel-main greenBACKGROUND">
+                                        <div class="panel-heading whiteCOLOR redBACKGROUND font125">Expenses</div>
+                                        <div class="panel-body">
+                                            @if (Model.WeekList[i].ExpenseList.Count == 0)
+                                            {
+                                                <div class="col-sm-6 col-sm-offset-3 text-center font125 whiteCOLOR redBACKGROUND roundBORDER">No Expenses</div>
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < Model.WeekList[i].ExpenseList.Count; x++)
+                                                {
+                                                    <div class="col-sm-4 text-right">
+                                                        <p class="font125">@string.Format("{0:C}", Model.WeekList[i].ExpenseList[x].Amount)</p>
+                                                    </div>
+                                                    <div class="col-sm-8 text-left">
+                                                        <p class="font125">@Model.WeekList[i].ExpenseList[x].Descr (@Model.WeekList[i].ExpenseList[x].Date.ToString("dddd, MMMM dd"))</p>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 noPadding">
+                                @if (Model.WeekList[i].CombinedBalance < 0)
+                                {
+                                    <span class="font150 bold redCOLOR" data-toggle="tooltip" data-placement="top" data-container="body" title="This is the combined balance of all of your accounts included in your Cash Flow Analysis at the end of this week">@string.Format("{0:C}", Model.WeekList[i].CombinedBalance) <i class="fa fa-question-circle"></i></span>
+                                }
+                                else
+                                {
+                                    <span class="font150 bold greenCOLOR" data-toggle="tooltip" data-placement="top" data-container="body" title="This is the combined balance of all of your accounts included in your Cash Flow Analysis at the end of this week">+@string.Format("{0:C}", Model.WeekList[i].CombinedBalance) <i class="fa fa-question-circle"></i></span>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+                
+        </div>
+        <div id="daily" class="tab-pane fade">
+
+            @if (Model.AccountList.Count == 0 || Model.DayList.Count == 0)
+            {
+                <div class="col-sm-12 noPadding" style="padding-top: 0px;">
+                    <h1 class="text-center greyblueCOLOR">Not Enough Information To Display Cash Flow</h1>
+                    <div class="col-sm-6 col-sm-offset-3 noPadding">
+                        <ul class="font125">
+                            <li><strong>Income/Expense Could Be Missing</strong> - You must have at least one income or expense entered.</li>
+                            <li><strong>Financial Account Could Be Missing</strong> - You must have at least one financial account entered that is included in your cash flow.</li>
+                            <li><strong>Click on "New User" on how to get started using CashFlow Organizer.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                for (int i = 0; i < Model.DayList.Count; i++)
+                {
+                    <div class="panel panel-main greyblueBACKGROUND topMargin20">
+                        <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">@Model.DayList[i].Date.ToLongDateString()</div>
+                        <div class="panel-body">
+
+                            <div class="col-sm-12 noPadding">
+                                <div class="col-sm-6 noPadding" style="padding-right:5px;">
+
+                                    <div class="panel panel-main greenBACKGROUND">
+                                        <div class="panel-heading whiteCOLOR greenBACKGROUND font125">Income</div>
+                                        <div class="panel-body">
+                                            @if (Model.DayList[i].IncomeList.Count == 0)
+                                            {
+                                                <div class="col-sm-6 col-sm-offset-3 text-center font125 whiteCOLOR greenBACKGROUND roundBORDER">No Income</div>
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < Model.DayList[i].IncomeList.Count; x++)
+                                                {
+                                                    <div class="col-sm-6 text-right">
+                                                        <p class="font125">@string.Format("{0:C}", Model.DayList[i].IncomeList[x].Amount)</p>
+                                                    </div>
+                                                    <div class="col-sm-6 text-left">
+                                                        <p class="font125">@Model.DayList[i].IncomeList[x].Descr</p>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-6 noPadding" style="padding-left:5px;">
+                                    <div class="panel panel-main greenBACKGROUND">
+                                        <div class="panel-heading whiteCOLOR redBACKGROUND font125">Expenses</div>
+                                        <div class="panel-body">
+                                            @if (Model.DayList[i].ExpenseList.Count == 0)
+                                            {
+                                                <div class="col-sm-6 col-sm-offset-3 text-center font125 whiteCOLOR redBACKGROUND roundBORDER">No Expenses</div>
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < Model.DayList[i].ExpenseList.Count; x++)
+                                                {
+                                                    <div class="col-sm-6 text-right">
+                                                        <p class="font125">@string.Format("{0:C}", Model.DayList[i].ExpenseList[x].Amount)</p>
+                                                    </div>
+                                                    <div class="col-sm-6 text-left">
+                                                        <p class="font125">@Model.DayList[i].ExpenseList[x].Descr</p>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 noPadding">
+                                @if (Model.DayList[i].CombinedBalance < 0)
+                                {
+                                    <span class="font150 bold redCOLOR" data-toggle="tooltip" data-placement="top" data-container="body" title="This is the combined balance of all of your accounts included in your Cash Flow Analysis on this day after all income and expenses have been accounted for.">@string.Format("{0:C}", Model.DayList[i].CombinedBalance) <i class="fa fa-question-circle"></i></span>
+                                }
+                                else
+                                {
+                                    <span class="font150 bold greenCOLOR" data-toggle="tooltip" data-placement="top" data-container="body" title="This is the combined balance of all of your accounts included in your Cash Flow Analysis on this day after all income and expenses have been accounted for.">+@string.Format("{0:C}", Model.DayList[i].CombinedBalance) <i class="fa fa-question-circle"></i></span>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }                
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $('.ddl.form-control').change(function () {
+        $('#AjaxForm').submit();
+    });
+
+</script>

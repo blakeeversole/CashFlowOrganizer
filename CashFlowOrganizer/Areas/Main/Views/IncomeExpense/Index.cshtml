@@ -1,0 +1,44 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.CashFlowViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading text-center greyblueBACKGROUND whiteCOLOR font150">Instructions</div>
+            <div class="panel-body">
+                <h4>Enter any income or expenses you have on this page. Cash Flow Organizer will automatically caluclate your cash flow and know the specific dates each financial item will occur in the future.</h4>
+                <h4>For example, lets say you have a weekly grocery expense around $100 every Monday. This is how you would enter your grocery expense:</h4>
+                <ul class="font125">
+                    <li><strong>Description</strong> - Groceries</li>
+                    <li><strong>Frequency</strong> - Weekly</li>
+                    <li><strong>Date</strong> - Monday</li>
+                    <li><strong>Amount</strong> - $100.00</li>
+                </ul>
+                <h4>Cash Flow Organizer will then take that information along with any other income and expenses, create your cash flow, and display when your grocery expense will occur.</h4>
+                <h4>For all financil items, please make sure to select the correct frequency:</h4>
+                <ul class="font125">
+                    <li><strong>Monthly</strong> - Select the day the financial item occurs every month</li>
+                    <li><strong>Semi-Monthly</strong> - Select the two days the financial item occurs every month</li>
+                    <li><strong>Bi-Weekly</strong> - Select the next day the financial item occurs</li>
+                    <li><strong>Weekly</strong> - Select the day of the week the financial item occurs</li>
+                    <li><strong>Daily</strong> - No need to be more specific</li>
+                </ul>
+                <div class="modal-footer">
+                    <button type="button" class="btn whiteCOLOR greyblueBACKGROUND font125 btnHover" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-sm-12 noPadding topMargin20">
+    <div class="noPadding" id="CashFlowPartial">
+        @Html.Partial("_CashFlowPartial", Model)
+    </div>   
+</div>
+<script src="~/Scripts/CashFlowCalculations.js"></script>

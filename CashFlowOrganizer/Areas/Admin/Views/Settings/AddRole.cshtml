@@ -1,0 +1,62 @@
+﻿
+@*@{
+    Layout = "_LayoutAdmin";
+}*@
+
+@model CashFlowOrganizer.Areas.Admin.Models.RoleViewModel
+
+
+    <div class="col-sm-12 topMargin40 noPadding">
+
+        <div class="col-sm-6 col-sm-offset-3 noPadding">
+
+            @using (Html.BeginForm("AddRole", "Settings", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="panel panel-main greyblueBACKGROUND">
+                    <div class="panel-heading text-center font150 whiteCOLOR greyblueBACKGROUND">Add Role</div>
+                    <div class="panel-body">
+
+                        <div class="col-sm-12 noPadding">
+
+                            <div class="col-sm-12 text-center noPadding">
+                                @Html.LabelFor(m => m.Code, htmlAttributes: new { @class = "control-label tallLabel" })
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1 noPadding">
+                                @Html.EditorFor(m => m.Code, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Code" } })
+                                @Html.ValidationMessageFor(m => m.Code)
+                            </div>
+                            <div class="col-sm-12 text-center noPadding">
+                                @Html.LabelFor(m => m.Descr, htmlAttributes: new { @class = "control-label tallLabel" })
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1 noPadding">
+                                @Html.EditorFor(m => m.Descr, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Description" } })
+                                @Html.ValidationMessageFor(m => m.Descr)
+                            </div>
+                            <div class="col-sm-12 text-center noPadding">
+                                @Html.LabelFor(m => m.SortOrder, htmlAttributes: new { @class = "control-label tallLabel" })
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1 noPadding">
+                                @Html.EditorFor(m => m.SortOrder, new { htmlAttributes = new { @class = "form-control tallInput wideInput", @placeholder = "Sort Order" } })
+                                @Html.ValidationMessageFor(m => m.SortOrder)
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-block btnHover font125 whiteCOLOR greyblueBACKGROUND">Add Role</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 text-center font125">
+            @Html.ValidationMessage("Summary")
+        </div>
+
+    </div>
+
+

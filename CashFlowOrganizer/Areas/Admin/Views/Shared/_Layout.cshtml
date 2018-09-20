@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Flow Organizer</title>
+    <link rel="icon" href="~/Content/images/CFO.png" type="image/gif" sizes="16x16">
+
+    @Styles.Render("~/Content/EveryPageContent")
+    @Scripts.Render("~/bundles/EveryPageScript")
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index","Settings")" class="navbar-brand">Cash Flow Organizer</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="margin-top: 10px;margin-bottom: 10px;">
+                    <li><a class="font125 btnHover" href="@Url.Action("Index","Settings")">Settings</a></li>
+                    <li><a class="font125 btnHover" href="#">Payments</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-top: 10px;margin-bottom: 10px;">
+                    <li><a class="font125 btnHover" href="@Url.Action("SignOut", "Account", new { area = "" })">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="footer text-center font150 whiteCOLOR">
+            WELCOME ADMIN...
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

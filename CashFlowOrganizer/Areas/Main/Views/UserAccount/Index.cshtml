@@ -1,0 +1,96 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.UserAccount
+
+<div class="col-sm-12 topMargin40 noPadding">
+
+    <div class="col-sm-6 whiteBACKGROUND noPadding">
+        <h1 class="blackCOLOR">Your Account</h1>
+    </div>
+
+</div>
+
+<div class="col-sm-12 topMargin40 noPadding" style="margin-bottom:80px;">
+
+    <div class="col-sm-6 noPadding rightPadding">       
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font175 text-center">Change Email</div>
+            <div class="panel-body">
+
+                <div id="Email">@Html.Partial("_EmailPartial", Model)</div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font175 text-center">Change Username</div>
+            <div class="panel-body">
+
+                <div id="Username">@Html.Partial("_UsernamePartial", Model)</div>
+
+            </div>
+        </div>
+
+             
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font175 text-center">Account</div>
+            <div class="panel-body">
+
+                @*<div class="text-center font150">Subscription Status: <strong>@Model.SubscriptionStatus</strong></div>*@
+                @*<p></p>*@
+                @*<p class="font125">If you cancel your subscription you will no longer be billed monthly and your account will be deleted.</p>*@
+                @*<p></p>*@
+                <div class="text-center">
+                    <a class="btn btn-block btnHover font125 orangeredBACKGROUND whiteCOLOR roundBORDER"
+                        href="@Url.Action("CancelSubscription","UserAccount")"
+                        data-toggle="confirmation"
+                        data-placement="top"
+                        data-singleton="true"
+                        data-popout="true"
+                        data-btn-cancel-class="blackCOLOR whiteBACKGROUND"
+                        data-btn-ok-class="whiteCOLOR greyblueBACKGROUND"
+                        data-title="Are you sure you want cancel your account?"> @*subscription and delete your*@
+                        Delete Account
+                    </a>
+                </div>
+
+            </div>
+        </div>
+           
+
+    </div>
+
+        <div class="col-sm-6 noPadding leftPadding">
+
+            <div class="panel panel-main greyblueBACKGROUND">
+                <div class="panel-heading greyblueBACKGROUND whiteCOLOR font175 text-center">Change Password</div>
+                <div class="panel-body">
+
+                    <div id="Password">@Html.Partial("_PasswordPartial", Model)</div>
+
+                </div>
+            </div>
+
+            @*<div class="panel panel-main greyblueBACKGROUND">
+                <div class="panel-heading greyblueBACKGROUND whiteCOLOR font175 text-center">Billing</div>
+                <div class="panel-body">
+
+                    <div id="Billing">@Html.Partial("_BillingPartial", Model)</div>
+
+                </div>
+            </div>*@
+
+        </div>
+
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $('[data-toggle=confirmation]').confirmation({
+    });
+</script>

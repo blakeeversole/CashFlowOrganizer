@@ -1,0 +1,245 @@
+﻿@model CashFlowOrganizer.Areas.Main.Models.CashFlowModels
+@{
+    ViewBag.Title = "Index";
+}
+
+  <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading text-center greyblueBACKGROUND whiteCOLOR font150">Getting Started</div>
+            <div class="panel-body">
+                <h2 class="text-center">Welcome to Cash Flow Organzier!</h2>
+                <h4 class="text-center">Here are a few quick and easy steps to get started</h4>
+                <ul class="font125">
+                    <li><strong>Step 1</strong> - Go to Income/Expenses and enter any income and expenses you may have.</li>
+                    <li><strong>Step 2</strong> - Go to Financial Accounts and enter your bank and credit accounts. Don't worry we do not request any bank or credit card information</li>
+                    <li><strong>Step 3</strong> - Easily view your cash flow and your finacial statistics on your dashboard. Update your financial account balances when they change</li>
+                </ul>
+                <div class="modal-footer">
+                    <button type="button" class="btn whiteCOLOR greyblueBACKGROUND font125 btnHover" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="col-sm-12 topMargin40 noPadding">
+
+    <div class="col-sm-6 whiteBACKGROUND noPadding">
+        <h1 class="blackCOLOR">Hello @Model.Name,</h1>
+        <p class="font125">This is your dashboard.</p>
+        <div class="col-sm-4 noPadding" style="padding-bottom:20px;">
+            <button type="button" class="btn btn-block btn-lg btnHover" style="color: white; background-color: orangered" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-yelp font110"></i> New User?
+            </button>
+        </div>        
+    </div>
+  
+    <div class="col-sm-6 noPadding">
+
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Accounts</div>
+            <div class="panel-body">
+
+                @if (Model.AccountList.Count == 0)
+                {
+                    <div class="col-sm-6 col-sm-offset-3 text-center font125 blackCOLOR lightgreyBACKGROUND roundBORDER">No Accounts</div>
+                }
+                else
+                {
+                    <div class="col-sm-12 noPadding">
+                        <div class="col-sm-5 text-right font125"><strong>Account</strong></div>
+                        <div class="col-sm-3 text-right font125"><strong>Balance</strong></div>
+                    </div>
+
+                    for (int i = 0; i < Model.AccountList.Count; i++)
+                    {
+                        <div class="col-sm-12 noPadding">
+
+                            <div class="col-sm-5 font110 text-right" style="padding-top: 4px;">@Model.AccountList[i].Descr</div>
+                            <div class="col-sm-3 font110 text-right" style="padding-top: 4px;">@string.Format("{0:C}", Model.AccountList[i].Balance)</div>
+                            <div class="col-sm-4">
+                                @if (Model.AccountList[i].IncludeInCashFlow)
+                                {
+                                    <i class="greenCOLOR fa fa-check-circle-o font200" data-toggle="tooltip" data-placement="right" data-container="body" title="This account is included in your Cash Flow Analysis."></i>
+                                }
+                                else
+                                {
+                                    <i class="redCOLOR fa fa-remove font200" data-toggle="tooltip" data-placement="right" data-container="body" title="This account is NOT included in your Cash Flow Analysis."></i>
+                                }
+                            </div>
+
+                        </div>
+                    }
+
+                    <div class="col-sm-12 noPadding text-center">
+                     
+                            <a href="@Url.Action("Index","FinancialAccounts")" id="updateAccounts" class="btn whiteCOLOR orangeredBACKGROUND font125 roundBORDER">Update Balances</a>
+                      
+                    </div>
+                        
+                            
+                }
+
+                
+                                 
+                
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-sm-12 noPadding">
+
+    <div class="col-sm-4">
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Available Funds</div>
+            <div class="panel-body">    
+
+                @if (Model.AvailableFunds < 0)
+                {
+                    <h1 class="text-center redCOLOR">@string.Format("{0:C}", Model.AvailableFunds)</h1>
+                }
+                else
+                {
+                    <h1 class="text-center greenCOLOR">+@string.Format("{0:C}", Model.AvailableFunds)</h1>
+                }                          
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Total Money Saved</div>
+            <div class="panel-body">
+
+                @if (Model.TotalMoneySaved < 0)
+                {
+                    <h1 class="text-center redCOLOR">@string.Format("{0:C}", Model.TotalMoneySaved)</h1>
+                }
+                else
+                {
+                    <h1 class="text-center greenCOLOR">+@string.Format("{0:C}", Model.TotalMoneySaved)</h1>
+                } 
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Average Monthly Cash Flow</div>
+            <div class="panel-body">
+
+                @if (Model.AverageMonthlyCashFlow < 0)
+                {
+                    <h1 class="text-center redCOLOR">@string.Format("{0:C}", Model.AverageMonthlyCashFlow)</h1>
+                }
+                else
+                {
+                    <h1 class="text-center greenCOLOR">+@string.Format("{0:C}", Model.AverageMonthlyCashFlow)</h1>
+                }                 
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-sm-12 noPadding">
+
+    <div class="col-sm-6">
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Today's Expenses</div>
+            <div class="panel-body">
+
+                @if (Model.TodaysExpenses.Count == 0)
+                {
+                    <div class="col-sm-6 col-sm-offset-3 text-center font125 blackCOLOR lightgreyBACKGROUND roundBORDER">No Expenses</div>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.TodaysExpenses.Count; i++)
+                    {
+                        <div class="col-sm-4 text-right">
+                            <p class="font125"><strong>@string.Format("{0:C}", Model.TodaysExpenses[i].Amount)</strong></p>
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <p class="font125"><strong>@Model.TodaysExpenses[i].Descr</strong> (@Model.TodaysExpenses[i].Date.ToLongDateString())</p>
+                        </div>
+                    }
+                }                
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="panel panel-main greyblueBACKGROUND">
+            <div class="panel-heading greyblueBACKGROUND whiteCOLOR font125 text-center">Upcoming Expenses</div>
+            <div class="panel-body">
+
+                @if (Model.UpcomingExpenses.Count == 0)
+                {
+                    <div class="col-sm-6 col-sm-offset-3 text-center font125 blackCOLOR lightgreyBACKGROUND roundBORDER">No Expenses</div>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.UpcomingExpenses.Count; i++)
+                    {
+                        <div class="col-sm-4 text-right">
+                            <p class="font125"><strong>@string.Format("{0:C}", Model.UpcomingExpenses[i].Amount)</strong></p>
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <p class="font125"><strong>@Model.UpcomingExpenses[i].Descr</strong> (@Model.UpcomingExpenses[i].Date.ToString("dddd, MMMM dd"))</p>
+                        </div>
+                    }
+                }                
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="noPadding" id="CashFlowViews">
+    @Html.Partial("_CashFlowViews", Model)
+</div>  
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+
+        animateButton('#updateAccounts');
+    });
+
+    $('.ddl.form-control').change(function () {
+        $('#AjaxForm').submit();
+    });
+
+    function animateButton(button) {      
+        $(button).animate({ fontSize: '150%' }, 400);
+        $(button).animate({ fontSize: '125%' }, 400);
+
+        for (var i = 0; i < 3; i++) {
+            $(button).animate({ fontSize: '140%' }, 50);
+            $(button).animate({ fontSize: '125%' }, 50);
+        }
+    }
+
+    $('#updateAccounts').mouseover(function (e) {
+        $(this).animate({ fontSize: '150%' }, 400);
+    });
+
+    $('#updateAccounts').mouseleave(function (e) {
+        $(this).animate({ fontSize: '125%' }, 400);
+    });
+
+</script>
