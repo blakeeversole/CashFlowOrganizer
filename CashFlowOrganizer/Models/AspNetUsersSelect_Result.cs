@@ -14,20 +14,16 @@ namespace CashFlowOrganizer.Models
 
 using System;
     
-public partial class ProfileDeleteALL_Result
+public partial class AspNetUsersSelect_Result
 {
 
-    public Nullable<int> ErrorNumber { get; set; }
+    public string AspNetUsersID { get; set; }
 
-    public Nullable<int> ErrorSeverity { get; set; }
+    public string FirstName { get; set; }
 
-    public Nullable<int> ErrorState { get; set; }
+    public string LastName { get; set; }
 
-    public string ErrorProcedure { get; set; }
-
-    public Nullable<int> ErrorLine { get; set; }
-
-    public string ErrorMessage { get; set; }
+    public string Descr { get; set; }
 
 }
 

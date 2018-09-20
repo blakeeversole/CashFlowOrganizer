@@ -304,6 +304,7 @@
     <Content Include="Areas\Main\Views\UserAccount\_UsernamePartial.cshtml" />
     <Content Include="Areas\Main\Views\UserAccount\_BillingPartial.cshtml" />
     <Content Include="Areas\Main\Views\UserAccount\_PasswordPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Settings\ManageUsers.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\AllPages.js" />
     <Content Include="Scripts\bootstrap-confirmation.js" />
@@ -368,6 +369,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\AspNetUsersSelect_Result.cs">
+      <DependentUpon>CFOEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CFOEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

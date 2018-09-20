@@ -1,0 +1,29 @@
+﻿
+
+@model CashFlowOrganizer.Areas.Admin.Models.ManageUsersViewModel
+
+    <div class="col-sm-12 topMargin40 noPadding">
+
+        <div class="col-sm-6 col-sm-offset-3 noPadding">
+
+            @using (Html.BeginForm("ManageUsers", "Settings", FormMethod.Post))
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="panel panel-main greyblueBACKGROUND">
+                    <div class="panel-heading text-center font150 whiteCOLOR greyblueBACKGROUND">Manage Users</div>
+                    <div class="panel-body">
+
+                        <div class="col-sm-12 noPadding">
+
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+

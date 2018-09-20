@@ -14,6 +14,11 @@ namespace CashFlowOrganizer.Areas.Admin.Controllers
     [Authorize(Roles = "ADM")]
     public class SettingsController : BaseController
     {
+        public SettingsController()
+        {
+            db = new CashFlowOrganizerEntities();
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -24,6 +29,28 @@ namespace CashFlowOrganizer.Areas.Admin.Controllers
         public ActionResult AddRole()
         {
             RoleViewModel vm = new RoleViewModel();
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult ManageUsers()
+        {
+            ManageUsersViewModel vm = new ManageUsersViewModel();
+            vm.UserList = new List<UserFields>();
+
+            var result = db.AspNetUsersSelect().ToList();
+
+            foreach (var item in result)
+            {
+                UserFields user = new UserFields();
+
+                user.FirstName = item.FirstName;
+                user.LastName = item.LastName;
+                user.Role = item.Descr;
+
+                vm.UserList.Add(user);
+            }
 
             return View(vm);
         }

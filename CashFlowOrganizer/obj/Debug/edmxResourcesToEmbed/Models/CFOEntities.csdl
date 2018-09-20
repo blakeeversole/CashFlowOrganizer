@@ -46,6 +46,7 @@
     <FunctionImport Name="ProfileInfoSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.ProfileInfoSelect_Result)">
       <Parameter Name="ProfileID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="AspNetUsersSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.AspNetUsersSelect_Result)" />
   </EntityContainer>
   <ComplexType Name="ProfileInsert_Result">
     <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
@@ -112,5 +113,11 @@
     <Property Type="Decimal" Name="TotalMoneySaved" Nullable="false" Precision="19" />
     <Property Type="Decimal" Name="TotalAvailableFunds" Nullable="false" Precision="19" />
     <Property Type="Decimal" Name="AverageMonthlyCashFlow" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="AspNetUsersSelect_Result">
+    <Property Type="String" Name="AspNetUsersID" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Descr" Nullable="false" MaxLength="100" />
   </ComplexType>
 </Schema>

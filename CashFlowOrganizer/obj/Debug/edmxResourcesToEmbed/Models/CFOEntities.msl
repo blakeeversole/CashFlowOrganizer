@@ -106,5 +106,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AspNetUsersSelect" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUsersSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUsersSelect_Result">
+          <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Descr" ColumnName="Descr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
