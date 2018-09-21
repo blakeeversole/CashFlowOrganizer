@@ -130,6 +130,7 @@ namespace CashFlowOrganizer.Areas.Main.Controllers
                 if (profileId == null)
                     return RedirectToAction("SignOut", "Account", new { area = "" });
 
+                /* This is how you save! */
                 var storedProcedure = db.ProfileAccountInsertUpdate(Convert.ToInt32(profileId), accountXML.ToString()).ToList();
 
                 if (storedProcedure.FirstOrDefault().ErrorNumber.HasValue == true)

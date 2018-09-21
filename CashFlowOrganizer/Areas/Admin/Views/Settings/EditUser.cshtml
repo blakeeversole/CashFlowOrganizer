@@ -1,0 +1,38 @@
+﻿@model CashFlowOrganizer.Areas.Admin.Models.UserEdit
+
+@using (Html.BeginForm("Index"))
+{ 
+<div class="col-sm-6 col-sm-offset-3 noPadding">
+
+    <div class="panel panel-main greyblueBACKGROUND">
+        <div class="panel-heading text-center font150 whiteCOLOR greyblueBACKGROUND">Edit Users</div>
+
+        <div class="panel-body">
+
+            <div class="row noPadding">
+                <div class="col-sm-12 noPadding">
+                    <div>
+                        @Html.HiddenFor(m => m.AspNetUsersID)
+                    </div>
+                    <div>
+                        @Html.Label("First Name")
+                        @Html.EditorFor(m => m.FirstName)
+                    </div>
+                    <div>
+                        @Html.Label("Last Name")
+                        @Html.EditorFor(m => m.LastName)
+                    </div>
+                    <div>
+                        @Html.Label("User Role")
+                        @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.Roles, "RoleID", "RoleDescr"))
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button type="submit" id="SubmitButton" class="btn btn-block btn-lg btnHover greyblueBACKGROUND whiteCOLOR roundBORDER">Save Changes</button>
+    </div>
+</div>
+    }
+
+

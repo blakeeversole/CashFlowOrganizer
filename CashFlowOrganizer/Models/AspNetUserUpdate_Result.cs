@@ -14,16 +14,20 @@ namespace CashFlowOrganizer.Models
 
 using System;
     
-public partial class AspNetUsersSelect_Result
+public partial class AspNetUserUpdate_Result
 {
 
-    public string FirstName { get; set; }
+    public Nullable<int> ErrorNumber { get; set; }
 
-    public string LastName { get; set; }
+    public Nullable<int> ErrorSeverity { get; set; }
 
-    public string RoleDescr { get; set; }
+    public Nullable<int> ErrorState { get; set; }
 
-    public string AspNetUsersID { get; set; }
+    public string ErrorProcedure { get; set; }
+
+    public Nullable<int> ErrorLine { get; set; }
+
+    public string ErrorMessage { get; set; }
 
 }
 

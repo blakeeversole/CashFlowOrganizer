@@ -31,29 +31,7 @@ namespace CashFlowOrganizer.Areas.Admin.Controllers
             RoleViewModel vm = new RoleViewModel();
 
             return View(vm);
-        }
-
-        [HttpGet]
-        public ActionResult ManageUsers()
-        {
-            ManageUsersViewModel vm = new ManageUsersViewModel();
-            vm.UserList = new List<UserFields>();
-
-            var result = db.AspNetUsersSelect().ToList();
-
-            foreach (var item in result)
-            {
-                UserFields user = new UserFields();
-
-                user.FirstName = item.FirstName;
-                user.LastName = item.LastName;
-                user.Role = item.RoleDescr;
-
-                vm.UserList.Add(user);
-            }
-
-            return View(vm);
-        }
+        }        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -82,5 +60,56 @@ namespace CashFlowOrganizer.Areas.Admin.Controllers
                 return View(vm);
             }
         }
+
+        [HttpGet]
+        public ActionResult ManageUsers()
+        {
+            ManageUsersViewModel vm = new ManageUsersViewModel();
+
+            vm.UserList = new List<UserFields>();
+
+            var result = db.AspNetUsersSelect().ToList();
+
+            foreach (var item in result)
+            {
+                UserFields user = new UserFields();
+
+                user.AspNetUsersID = item.AspNetUsersID;
+                user.FirstName = item.FirstName;
+                user.LastName = item.LastName;
+                user.Role = item.RoleDescr;
+
+                vm.UserList.Add(user);
+            }
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(string AspNetUsersID)
+        {
+            UserEdit vm = new UserEdit();
+
+            var person = db.AspNetUsersSelectByAspNetUsersID(AspNetUsersID).FirstOrDefault();
+
+            vm.AspNetUsersID = person.AspNetUsersID;
+            vm.FirstName = person.FirstName;
+            vm.LastName = person.LastName;
+            vm.Role = person.RoleId;
+
+            ViewBag.Roles = db.RoleSelectAll();
+
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(UserEdit vm)
+        {
+            var result = db.AspNetUserUpdate(vm.AspNetUsersID,vm.FirstName,vm.LastName,vm.Role);
+
+            return RedirectToAction("ManageUsers");
+        }
+
     }
 }

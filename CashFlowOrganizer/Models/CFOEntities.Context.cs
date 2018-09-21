@@ -231,6 +231,52 @@ public partial class CashFlowOrganizerEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AspNetUsersSelect_Result>("AspNetUsersSelect");
     }
 
+
+    public virtual ObjectResult<AspNetUserUpdate_Result> AspNetUserUpdate(string aspNetUsersID, string firstName, string lastName, string roleId)
+    {
+
+        var aspNetUsersIDParameter = aspNetUsersID != null ?
+            new ObjectParameter("AspNetUsersID", aspNetUsersID) :
+            new ObjectParameter("AspNetUsersID", typeof(string));
+
+
+        var firstNameParameter = firstName != null ?
+            new ObjectParameter("FirstName", firstName) :
+            new ObjectParameter("FirstName", typeof(string));
+
+
+        var lastNameParameter = lastName != null ?
+            new ObjectParameter("LastName", lastName) :
+            new ObjectParameter("LastName", typeof(string));
+
+
+        var roleIdParameter = roleId != null ?
+            new ObjectParameter("RoleId", roleId) :
+            new ObjectParameter("RoleId", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AspNetUserUpdate_Result>("AspNetUserUpdate", aspNetUsersIDParameter, firstNameParameter, lastNameParameter, roleIdParameter);
+    }
+
+
+    public virtual ObjectResult<RoleSelectAll_Result> RoleSelectAll()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RoleSelectAll_Result>("RoleSelectAll");
+    }
+
+
+    public virtual ObjectResult<AspNetUsersSelectByAspNetUsersID_Result> AspNetUsersSelectByAspNetUsersID(string aspNetUsersID)
+    {
+
+        var aspNetUsersIDParameter = aspNetUsersID != null ?
+            new ObjectParameter("AspNetUsersID", aspNetUsersID) :
+            new ObjectParameter("AspNetUsersID", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AspNetUsersSelectByAspNetUsersID_Result>("AspNetUsersSelectByAspNetUsersID", aspNetUsersIDParameter);
+    }
+
 }
 
 }

@@ -6,6 +6,15 @@
     <edmx:StorageModels>
     <Schema Namespace="CashFlowOrganizerModelEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="AspNetUsersSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AspNetUsersSelectByAspNetUsersID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspNetUsersID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AspNetUserUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspNetUsersID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="RoleId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="CombinedBalanceSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProfileID" Type="int" Mode="In" />
         </Function>
@@ -51,6 +60,7 @@
           <Parameter Name="FirstName" Type="varchar" Mode="In" />
           <Parameter Name="LastName" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="RoleSelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CashFlowOrganizerModelEntitiesStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -103,6 +113,16 @@
           <Parameter Name="ProfileID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AspNetUsersSelect" ReturnType="Collection(CashFlowOrganizerModelEntities.AspNetUsersSelect_Result)" />
+          <FunctionImport Name="AspNetUserUpdate" ReturnType="Collection(CashFlowOrganizerModelEntities.AspNetUserUpdate_Result)">
+            <Parameter Name="AspNetUsersID" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RoleSelectAll" ReturnType="Collection(CashFlowOrganizerModelEntities.RoleSelectAll_Result)" />
+          <FunctionImport Name="AspNetUsersSelectByAspNetUsersID" ReturnType="Collection(CashFlowOrganizerModelEntities.AspNetUsersSelectByAspNetUsersID_Result)">
+            <Parameter Name="AspNetUsersID" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ProfileInsert_Result">
           <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
@@ -171,10 +191,28 @@
           <Property Type="Decimal" Name="AverageMonthlyCashFlow" Nullable="false" Precision="19" />
         </ComplexType>
         <ComplexType Name="AspNetUsersSelect_Result">
-          <Property Type="String" Name="AspNetUsersID" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="RoleDescr" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AspNetUsersID" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="AspNetUserUpdate_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="true" />
+          <Property Type="Int32" Name="ErrorState" Nullable="true" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="RoleSelectAll_Result">
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="RoleDescr" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="AspNetUsersSelectByAspNetUsersID_Result">
+          <Property Type="String" Name="AspNetUsersID" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="128" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -290,10 +328,40 @@
           <FunctionImportMapping FunctionImportName="AspNetUsersSelect" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUsersSelect">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUsersSelect_Result">
-                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="RoleDescr" ColumnName="RoleDescr" />
+                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AspNetUserUpdate" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUserUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUserUpdate_Result">
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RoleSelectAll" FunctionName="CashFlowOrganizerModelEntities.Store.RoleSelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.RoleSelectAll_Result">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleDescr" ColumnName="RoleDescr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AspNetUsersSelectByAspNetUsersID" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUsersSelectByAspNetUsersID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUsersSelectByAspNetUsersID_Result">
+                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

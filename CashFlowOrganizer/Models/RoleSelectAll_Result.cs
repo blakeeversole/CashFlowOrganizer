@@ -14,16 +14,12 @@ namespace CashFlowOrganizer.Models
 
 using System;
     
-public partial class AspNetUsersSelect_Result
+public partial class RoleSelectAll_Result
 {
 
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
+    public string RoleId { get; set; }
 
     public string RoleDescr { get; set; }
-
-    public string AspNetUsersID { get; set; }
 
 }
 

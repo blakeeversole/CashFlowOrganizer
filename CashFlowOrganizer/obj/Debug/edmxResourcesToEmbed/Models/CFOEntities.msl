@@ -109,10 +109,40 @@
     <FunctionImportMapping FunctionImportName="AspNetUsersSelect" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUsersSelect">
       <ResultMapping>
         <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUsersSelect_Result">
-          <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="RoleDescr" ColumnName="RoleDescr" />
+          <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AspNetUserUpdate" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUserUpdate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUserUpdate_Result">
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RoleSelectAll" FunctionName="CashFlowOrganizerModelEntities.Store.RoleSelectAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.RoleSelectAll_Result">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleDescr" ColumnName="RoleDescr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AspNetUsersSelectByAspNetUsersID" FunctionName="CashFlowOrganizerModelEntities.Store.AspNetUsersSelectByAspNetUsersID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CashFlowOrganizerModelEntities.AspNetUsersSelectByAspNetUsersID_Result">
+          <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
